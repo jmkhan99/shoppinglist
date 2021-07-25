@@ -12,6 +12,10 @@ body {
   font-size: 25px;
   line-height: 50px;
   text-align: center;
+  border-bottom: 1px solid #333333;
+}
+.main {
+  border: 1px solid #333333;
 }
 .main__items {
   display: flex;
@@ -53,7 +57,7 @@ body {
 .footer__input {
   width: 100%;
   font-size: 20px;
-  padding: 0 15px;
+  padding: 3px 15px;
   box-sizing: border-box;
 }
 .footer__input:focus {
