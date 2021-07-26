@@ -28,7 +28,6 @@ footerInput[0].addEventListener("keypress", (event) => {
 
 function handleCreateBlock() {
   if (footerInput[0].value === "") {
-    console.log("return");
     return;
   }
   const inputValueObj = {
@@ -39,11 +38,7 @@ function handleCreateBlock() {
 }
 
 function createBlock(inputValue) {
-  console.log("btn click");
   const createdLi = document.createElement("li");
-  createdLi.id = inputValue.id;
-  console.log(createdLi.id);
-  console.log(createdLi);
   createdLi.setAttribute("class", "main__items__list");
   mainItems[0].appendChild(createdLi);
   const createdSpan = document.createElement("span");
@@ -54,24 +49,24 @@ function createBlock(inputValue) {
   createdBtn.setAttribute("class", "main__items__button");
   createdLi.appendChild(createdBtn);
   const createdIcon = document.createElement("i");
+  createdIcon.dataset.id = inputValue.id;
   createdIcon.setAttribute("class", "fas fa-trash-alt main__items__list__icon");
   createdBtn.appendChild(createdIcon);
   toDoList.push(inputValue);
-  console.log(toDoList);
   footerInput[0].value = "";
   footerInput[0].focus();
   createdLi.scrollIntoView();
   localStorage.setItem("toDos", JSON.stringify(toDoList));
-  createdIcon.addEventListener("click", removeLi);
 }
+mainItems[0].addEventListener("click", removeLi);
 
 function removeLi(event) {
-  mainItems[0].removeChild(event.target.parentNode.parentNode);
-  const newToDoList = toDoList.filter(function (item) {
-    return item.id !== parseInt(event.target.parentNode.parentNode.id);
-  });
-  console.log(parseInt(event.target.parentNode.parentNode.id));
-  console.log(newToDoList);
-  localStorage.setItem("toDos", JSON.stringify(newToDoList));
-  toDoList = newToDoList;
+  if (event.target.dataset.id) {
+    mainItems[0].removeChild(event.target.parentNode.parentNode);
+    const newToDoList = toDoList.filter(function (item) {
+      return item.id !== parseInt(event.target.dataset.id);
+    });
+    localStorage.setItem("toDos", JSON.stringify(newToDoList));
+    toDoList = newToDoList;
+  }
 }
