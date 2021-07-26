@@ -20,7 +20,6 @@ if (localToDos) {
 
 footerBtn[0].addEventListener("click", handleCreateBlock);
 footerInput[0].addEventListener("keypress", (event) => {
-  console.log("Enter");
   if (event.key === "Enter") {
     handleCreateBlock();
   }
